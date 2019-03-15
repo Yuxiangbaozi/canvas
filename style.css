@@ -1,0 +1,103 @@
+*{margin: 0; padding: 0;}
+ol,ul{
+    list-style: none;
+}
+.clearfix::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+.icon{
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+body>canvas{
+    display: block;
+    position: relative;
+}
+body>#svg{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    
+}
+body>#svg>svg{
+    width: 1.5em;
+    height: 1.5em;
+    padding: 8px 0;
+    margin: 0 10px;
+    transition: all 0.3s;
+}
+body>#svg>svg.action{
+    fill: red;
+    transform: scale(1.2);
+    transition: all 0.3s;
+}
+
+body>#colour{
+    position: fixed;
+    top: 40px;
+    left: 0;
+    padding-left: 15px;
+}
+body>#colour>div{
+    width: 20px;
+    height: 20px;
+    margin: 15px 0px;
+}
+body>#colour>.black{
+    background: black;
+    border: 2px solid transparent;
+}
+body>#colour>.blue{
+    background: blue;
+    border: 2px solid transparent;
+}
+body>#colour>.green{
+    background: green;
+    border: 2px solid transparent;
+}
+body>#colour>.yellow{
+    background: yellow;
+    border: 2px solid transparent;
+}
+body>#colour>.red{
+    background: red;
+    border: 2px solid transparent;
+}
+body>#colour>.orange{
+    background: orange;
+    border: 2px solid transparent;
+}
+body>#colour>.black.act{
+    background: black;
+    border: 2px solid #aaaaaa;
+}
+body>#colour>.blue.act{
+    background: blue;
+    border: 2px solid #aaaaaa;
+}
+body>#colour>.green.act{
+    background: green;
+    border: 2px solid #aaaaaa;
+}
+body>#colour>.yellow.act{
+    background: yellow;
+    border: 2px solid #aaaaaa;
+}
+body>#colour>.red.act{
+    background: red;
+    border: 2px solid #aaaaaa;
+}
+body>#colour>.orange.act{
+    background: orange;
+    border: 2px solid #aaaaaa;
+}
+body>#sl{
+    position: absolute;
+    bottom: 80px;
+    left: 0px;
+}
+
