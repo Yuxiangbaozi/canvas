@@ -101,3 +101,17 @@ body>#sl{
     left: 0px;
 }
 
+body>.button{
+    position: absolute;
+    top: 300px;
+    left: 15px;
+    display: flex;
+    flex-direction: column;
+}
+body>.button>button{
+    margin: 8% 0;
+}
+body>.button>button.active{
+    color: red;
+}
+

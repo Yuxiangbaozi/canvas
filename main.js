@@ -1,24 +1,37 @@
 var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 
-/**********************创建笔画大小控制栏*************************/
-/*
-var size = {0:'1',1:'2',2:'3',3:'4',4:'5',length:5}
-var index = 0
-    sl = document.createElement('select')
-    body.appendChild(sl)
-    sl.name = 'sl'
-    sl.id = 'sl'
-
-while (index < size['length']) {
-    opt = document.createElement('option')
-    sl.appendChild(opt)
-    opt.id ='a' + size[index]
-    opt.value = size[index]
-    opt.textContent = size[index]
-    index = index + 1
+/**********************初始化值*************************/
+var obj = {
+    set current(value) {
+        this.radius = value
+        this.lineWidth = value*2
+        this.lineWidth2 = this.lineWidth + 10
+        this.radius2 = this.lineWidth2/2
+    },
+    radius: 1,
+    lineWidth: 2,
+    lineWidth2: 12,
+    radius2: 6
 }
-*/
+var click = false;
+var 初始坐标 = {"x":undefined, "y":undefined}
+
+/**********************创建笔画大小控制栏*************************/
+
+
+var buts = document.querySelectorAll('.button>button')
+buts.forEach((but)=> {
+    but.addEventListener('click' , (cl)=> {
+        let children = cl.target.parentElement.childNodes
+        children.forEach((child)=> {
+            child.classList.remove('active')
+        })
+        obj.current = parseInt(cl.target.innerText) 
+        cl.target.classList.add('active')
+    })
+})
+
 /**********************创建颜色控制栏*************************/
 var colours = {0:'black',1:'blue',2:'green',3:'yellow',4:'red',5:'orange',length:6};
 var key = 0;
@@ -35,11 +48,7 @@ while (key < colours['length']) {
     key = key + 1
 }
 
-/**********************初始化值*************************/
-var radius = 5
-var lineWidth = radius*2
-var click = false;
-var 初始坐标 = {"x":undefined, "y":undefined}
+
 
 /***************监听重置******************************/
 clear.onclick = function(){
@@ -48,8 +57,8 @@ clear.onclick = function(){
 
 /***************监听下载******************************/
 download.onclick = function(){
-    var download = canvas.toDataURL('image/png')
-    var a = document.createElement('a')
+    let download = canvas.toDataURL('image/png')
+    let a = document.createElement('a')
     document.body.appendChild(a)
     a.href = download
     a.download = 'my picture'
@@ -142,24 +151,24 @@ window.onresize = function() {
 if (document.body.ontouchstart !== undefined) {
     canvas.ontouchstart = function(touch){
         click = true
-        var x = touch.touches[0].clientX
-        var y = touch.touches[0].clientY
+        let x = touch.touches[0].clientX
+        let y = touch.touches[0].clientY
         初始坐标 = {"X":x,"Y":y}
         if (useeraser) {
-            context.clearRect(x-radius,y-radius,lineWidth,lineWidth);}
+            context.clearRect(x-obj.radius2,y-obj.radius2,obj.lineWidth2,obj.lineWidth2);}
         else{
-            doarc(x,y,radius);}
+            doarc(x,y,obj.radius);}
         }
     canvas.ontouchmove = function(touch){
         if (click) {
-            var x = touch.touches[0].clientX
-            var y = touch.touches[0].clientY
-            var 新坐标 = {"X":x,"Y":y}
+            let x = touch.touches[0].clientX
+            let y = touch.touches[0].clientY
+            let 新坐标 = {"X":x,"Y":y}
             if (useeraser) {
-                context.clearRect(x-radius,y-radius,lineWidth,lineWidth);}
+                context.clearRect(x-obj.radius2,y-pbj.radius2,obj.lineWidth2,obj.lineWidth2);}
             else{
-                doarc(x,y,radius);
-                doline(初始坐标.X,初始坐标.Y,新坐标.X,新坐标.Y,lineWidth);
+                doarc(x,y,obj.radius);
+                doline(初始坐标.X,初始坐标.Y,新坐标.X,新坐标.Y,obj.lineWidth);
             }
             初始坐标 = 新坐标
         }
@@ -171,24 +180,24 @@ if (document.body.ontouchstart !== undefined) {
 else{
     canvas.onmousedown = function(mouse) {
         click = true
-        var x = mouse.clientX
-        var y = mouse.clientY
+        let x = mouse.clientX
+        let y = mouse.clientY
         初始坐标 = {"X":x,"Y":y}
         if (useeraser) {
-            context.clearRect(x-radius,y-radius,lineWidth,lineWidth);}
+            context.clearRect(x-obj.radius2,y-obj.radius2,obj.lineWidth2,obj.lineWidth2);}
         else{
-            doarc(x,y,radius);}
+            doarc(x,y,obj.radius);}
     }
     canvas.onmousemove = function(mouse){
         if (click) {
-            var x = mouse.clientX
-            var y = mouse.clientY
-            var 新坐标 = {"X":x,"Y":y}
+            let x = mouse.clientX
+            let y = mouse.clientY
+            let 新坐标 = {"X":x,"Y":y}
             if (useeraser) {
-                context.clearRect(x-radius,y-radius,lineWidth,lineWidth);}
+                context.clearRect(x-obj.radius2,y-obj.radius2,obj.lineWidth2,obj.lineWidth2);}
             else{
-                doarc(x,y,radius);
-                doline(初始坐标.X,初始坐标.Y,新坐标.X,新坐标.Y,lineWidth);
+                doarc(x,y,obj.radius);
+                doline(初始坐标.X,初始坐标.Y,新坐标.X,新坐标.Y,obj.lineWidth);
             }
         初始坐标 = 新坐标
         }
@@ -199,8 +208,8 @@ else{
 }
 /************函数************/
 function setcanvassize(canvas) {
-    var height = document.documentElement.clientHeight;
-    var width = document.documentElement.clientWidth;
+    let height = document.documentElement.clientHeight;
+    let width = document.documentElement.clientWidth;
     canvas.height = height;
     canvas.width = width;
 }
